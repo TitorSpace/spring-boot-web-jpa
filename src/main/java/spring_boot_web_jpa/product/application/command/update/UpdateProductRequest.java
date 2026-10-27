@@ -2,7 +2,7 @@ package spring_boot_web_jpa.product.application.command.update;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
-import spring_boot_web_jpa.common.mediator.Request;
+import spring_boot_web_jpa.common.application.mediator.Request;
 
 @Data
 public class UpdateProductRequest implements Request<Void> {

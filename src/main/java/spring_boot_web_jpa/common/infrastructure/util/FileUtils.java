@@ -1,4 +1,4 @@
-package spring_boot_web_jpa.common.util;
+package spring_boot_web_jpa.common.infrastructure.util;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

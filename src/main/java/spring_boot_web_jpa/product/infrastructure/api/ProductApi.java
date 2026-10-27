@@ -3,16 +3,14 @@ package spring_boot_web_jpa.product.infrastructure.api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import spring_boot_web_jpa.common.domain.PaginationResult;
 import spring_boot_web_jpa.product.infrastructure.api.dto.CreateProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.dto.ProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.dto.UpdateProductDto;
 
-import java.util.List;
-
 public interface ProductApi {
 
-    ResponseEntity<List<ProductDto>> getAllProduct(@RequestParam(required = false) String pageSize);
+    ResponseEntity<PaginationResult<ProductDto>> getAllProduct(int pageNumber, int pageSize);
 
     ResponseEntity<ProductDto> getProductById(@PathVariable Long id);
 

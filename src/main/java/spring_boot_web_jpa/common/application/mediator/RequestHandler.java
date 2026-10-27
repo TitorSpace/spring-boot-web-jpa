@@ -1,4 +1,4 @@
-package spring_boot_web_jpa.common.mediator;
+package spring_boot_web_jpa.common.application.mediator;
 
 //T is in charge of example of use case of deleting one product. A request.
 //R refers to our response

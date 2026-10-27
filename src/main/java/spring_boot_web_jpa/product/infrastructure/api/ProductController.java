@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring_boot_web_jpa.common.mediator.Mediator;
+import spring_boot_web_jpa.common.application.mediator.Mediator;
+import spring_boot_web_jpa.common.domain.PaginationQuery;
+import spring_boot_web_jpa.common.domain.PaginationResult;
 import spring_boot_web_jpa.product.application.command.create.CreateProductRequest;
 import spring_boot_web_jpa.product.application.command.create.CreateProductResponse;
 import spring_boot_web_jpa.product.application.command.delete.DeleteProductRequest;
@@ -23,7 +25,6 @@ import spring_boot_web_jpa.product.infrastructure.api.dto.UpdateProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.mapper.ProductMapper;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -39,17 +40,27 @@ public class ProductController implements ProductApi {
     //With ResponseEntity objects we make sure that they last what the http request last, no more
     @Operation(summary = "Get all products", description = "Get all products")
     @GetMapping("")
-    public ResponseEntity<List<ProductDto>> getAllProduct(@RequestParam(required = false) String pageSize) {
+    public ResponseEntity<PaginationResult<ProductDto>> getAllProduct(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "5") int pageSize
+    ) {
 
         log.info("Getting all products");
 
-        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest());
+        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest(new PaginationQuery(pageNumber, pageSize)));
 
-        List<ProductDto> productDtos = response.getProducts().stream().map(productMapper::mapToProductDto).toList();
+        PaginationResult<Product> productsPage = response.getProductsPage();
 
-        log.info("Found {} products", productDtos.size());
+        PaginationResult<ProductDto> productDtoPaginationResult = new PaginationResult<>(
+                productsPage.getContent().stream().map(productMapper::mapToProductDto).toList(),
+                productsPage.getPage(),
+                productsPage.getSize(),
+                productsPage.getTotalPages(),
+                productsPage.getTotalElements()
 
-        return ResponseEntity.ok(productDtos);
+        );
+
+        return ResponseEntity.ok(productDtoPaginationResult);
     }
 
     @Operation(summary = "Get product by id", description = "Get product by id")

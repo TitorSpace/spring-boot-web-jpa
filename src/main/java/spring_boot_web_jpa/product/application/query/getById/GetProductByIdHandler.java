@@ -3,7 +3,7 @@ package spring_boot_web_jpa.product.application.query.getById;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import spring_boot_web_jpa.common.mediator.RequestHandler;
+import spring_boot_web_jpa.common.application.mediator.RequestHandler;
 import spring_boot_web_jpa.product.domain.entity.Product;
 import spring_boot_web_jpa.product.domain.exception.ProductNotFoundException;
 import spring_boot_web_jpa.product.domain.port.ProductRepository;

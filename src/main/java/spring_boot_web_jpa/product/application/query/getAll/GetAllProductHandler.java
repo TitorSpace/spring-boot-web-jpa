@@ -3,11 +3,10 @@ package spring_boot_web_jpa.product.application.query.getAll;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import spring_boot_web_jpa.common.mediator.RequestHandler;
+import spring_boot_web_jpa.common.application.mediator.RequestHandler;
+import spring_boot_web_jpa.common.domain.PaginationResult;
 import spring_boot_web_jpa.product.domain.entity.Product;
 import spring_boot_web_jpa.product.domain.port.ProductRepository;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +21,7 @@ public class GetAllProductHandler implements RequestHandler<GetAllProductRequest
 
         log.info("Getting all products");
 
-        List<Product> products = productRepository.findAll();
-
-        log.info("Found {} products", products.size());
+        PaginationResult<Product> products = productRepository.findAll(request.getPaginationQuery());
 
         return new GetAllProductResponse(products);
     }
