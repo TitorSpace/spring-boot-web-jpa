@@ -1,13 +1,13 @@
-//package spring_boot_web_hexagon_arch.product.application.query.getById;
+//package spring_boot_web_jpa.product.application.query.getById;
 //
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.extension.ExtendWith;
 //import org.mockito.InjectMocks;
 //import org.mockito.Mock;
 //import org.mockito.junit.jupiter.MockitoExtension;
-//import spring_boot_web_hexagon_arch.product.domain.entity.Product;
-//import spring_boot_web_hexagon_arch.product.domain.exception.ProductNotFoundException;
-//import spring_boot_web_hexagon_arch.product.domain.port.ProductRepository;
+//import spring_boot_web_jpa.product.domain.entity.Product;
+//import spring_boot_web_jpa.product.domain.exception.ProductNotFoundException;
+//import spring_boot_web_jpa.product.domain.port.ProductRepository;
 //
 //import java.util.Optional;
 //

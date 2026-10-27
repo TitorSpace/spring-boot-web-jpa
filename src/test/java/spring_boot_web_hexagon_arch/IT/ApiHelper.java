@@ -1,4 +1,4 @@
-//package spring_boot_web_hexagon_arch.IT;
+//package spring_boot_web_jpa.IT;
 //
 //import org.springframework.boot.test.context.TestConfiguration;
 //import org.springframework.context.annotation.Bean;

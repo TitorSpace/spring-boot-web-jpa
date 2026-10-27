@@ -1,0 +1,23 @@
+package spring_boot_web_jpa.product.infrastructure.api.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
+import spring_boot_web_jpa.product.application.command.create.CreateProductRequest;
+import spring_boot_web_jpa.product.application.command.update.UpdateProductRequest;
+import spring_boot_web_jpa.product.domain.entity.Product;
+import spring_boot_web_jpa.product.infrastructure.api.dto.CreateProductDto;
+import spring_boot_web_jpa.product.infrastructure.api.dto.ProductDto;
+import spring_boot_web_jpa.product.infrastructure.api.dto.UpdateProductDto;
+
+//Mapper has diff attrss. ComponentModel now everytime that starts is going the implement in runtime the class of this interface
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
+public interface ProductMapper {
+
+    CreateProductRequest mapToCreateProductRequest(CreateProductDto createProductDto);
+
+    UpdateProductRequest mapToUpdateProductRequest(UpdateProductDto updateProductDto);
+
+    ProductDto mapToProductDto(Product product);
+
+}

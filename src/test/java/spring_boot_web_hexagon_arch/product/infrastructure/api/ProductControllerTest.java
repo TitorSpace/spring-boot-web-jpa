@@ -1,4 +1,4 @@
-package spring_boot_web_hexagon_arch.product.infrastructure.api;
+package spring_boot_web_jpa.product.infrastructure.api;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,12 +7,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import spring_boot_web_hexagon_arch.common.mediator.Mediator;
-import spring_boot_web_hexagon_arch.product.application.query.getAll.GetAllProductRequest;
-import spring_boot_web_hexagon_arch.product.application.query.getAll.GetAllProductResponse;
-import spring_boot_web_hexagon_arch.product.domain.entity.Product;
-import spring_boot_web_hexagon_arch.product.infrastructure.api.dto.ProductDto;
-import spring_boot_web_hexagon_arch.product.infrastructure.api.mapper.ProductMapper;
+import spring_boot_web_jpa.common.mediator.Mediator;
+import spring_boot_web_jpa.product.application.query.getAll.GetAllProductRequest;
+import spring_boot_web_jpa.product.application.query.getAll.GetAllProductResponse;
+import spring_boot_web_jpa.product.domain.entity.Product;
+import spring_boot_web_jpa.product.infrastructure.api.dto.ProductDto;
+import spring_boot_web_jpa.product.infrastructure.api.mapper.ProductMapper;
 
 import java.util.List;
 

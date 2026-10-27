@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.titor</groupId>
-    <artifactId>spring-boot-web-hexagon-arch</artifactId>
+    <artifactId>spring-boot-web-jpa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-web-hexagon-arch</name>
-    <description>Hexagonal Architecture Spring Boot Web Project</description>
+    <name>spring-boot-web-jpa</name>
+    <description>JPA Spring Boot Web Project</description>
     <url/>
     <licenses>
         <license/>

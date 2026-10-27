@@ -1,0 +1,11 @@
+package spring_boot_web_jpa.product.application.query.getAll;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import spring_boot_web_jpa.common.mediator.Request;
+
+@Data
+@AllArgsConstructor
+public class GetAllProductRequest implements Request<GetAllProductResponse> {
+
+}

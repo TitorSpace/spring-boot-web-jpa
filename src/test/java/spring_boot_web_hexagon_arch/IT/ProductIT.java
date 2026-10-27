@@ -1,4 +1,4 @@
-//package spring_boot_web_hexagon_arch.IT;
+//package spring_boot_web_jpa.IT;
 //
 //import lombok.extern.slf4j.Slf4j;
 //import org.junit.jupiter.api.AfterEach;
@@ -13,9 +13,9 @@
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.mock.web.MockMultipartFile;
 //import org.springframework.test.web.servlet.MockMvc;
-//import spring_boot_web_hexagon_arch.product.domain.entity.Product;
-//import spring_boot_web_hexagon_arch.product.domain.port.ProductRepository;
-//import spring_boot_web_hexagon_arch.product.infrastructure.api.dto.ProductDto;
+//import spring_boot_web_jpa.product.domain.entity.Product;
+//import spring_boot_web_jpa.product.domain.port.ProductRepository;
+//import spring_boot_web_jpa.product.infrastructure.api.dto.ProductDto;
 //
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertNotNull;
