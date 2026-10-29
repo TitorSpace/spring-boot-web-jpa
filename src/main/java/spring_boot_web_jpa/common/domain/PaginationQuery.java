@@ -11,4 +11,6 @@ public class PaginationQuery {
 
     private int page;
     private int Size;
+    private String sortBy;
+    private String direction;
 }

@@ -10,7 +10,7 @@ import spring_boot_web_jpa.product.infrastructure.api.dto.UpdateProductDto;
 
 public interface ProductApi {
 
-    ResponseEntity<PaginationResult<ProductDto>> getAllProduct(int pageNumber, int pageSize);
+    ResponseEntity<PaginationResult<ProductDto>> getAllProduct(int pageNumber, int pageSize, String sortBy, String direction);
 
     ResponseEntity<ProductDto> getProductById(@PathVariable Long id);
 

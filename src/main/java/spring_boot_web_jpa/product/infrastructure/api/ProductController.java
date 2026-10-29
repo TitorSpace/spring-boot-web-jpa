@@ -42,12 +42,15 @@ public class ProductController implements ProductApi {
     @GetMapping("")
     public ResponseEntity<PaginationResult<ProductDto>> getAllProduct(
             @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "5") int pageSize
+            @RequestParam(defaultValue = "5") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction
     ) {
 
         log.info("Getting all products");
 
-        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest(new PaginationQuery(pageNumber, pageSize)));
+        PaginationQuery paginationQuery = new PaginationQuery(pageNumber, pageSize, sortBy, direction);
+        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest(paginationQuery));
 
         PaginationResult<Product> productsPage = response.getProductsPage();
 
