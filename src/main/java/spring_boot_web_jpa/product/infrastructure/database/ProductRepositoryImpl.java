@@ -15,9 +15,9 @@ import spring_boot_web_jpa.product.domain.entity.Product;
 import spring_boot_web_jpa.product.domain.entity.ProductFilter;
 import spring_boot_web_jpa.product.domain.port.ProductRepository;
 import spring_boot_web_jpa.product.infrastructure.database.entity.ProductEntity;
-import spring_boot_web_jpa.product.infrastructure.database.entity.ProductSpecification;
 import spring_boot_web_jpa.product.infrastructure.database.mapper.ProductEntityMapper;
 import spring_boot_web_jpa.product.infrastructure.database.repository.QueryProductRepository;
+import spring_boot_web_jpa.product.infrastructure.database.specification.ProductSpecification;
 
 import java.util.Optional;
 

@@ -1,0 +1,23 @@
+package spring_boot_web_jpa.productDetail.infrastructure;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import spring_boot_web_jpa.product.infrastructure.database.entity.ProductEntity;
+
+@Data
+@Entity
+@Table(name = "product_details")
+public class ProductDetailEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String specifications;
+    private String warranty;
+    private String provider;
+
+    @OneToOne(mappedBy = "productDetailEntity")
+    private ProductEntity productEntity;
+
+
+}

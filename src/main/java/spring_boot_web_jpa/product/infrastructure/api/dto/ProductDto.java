@@ -2,6 +2,8 @@ package spring_boot_web_jpa.product.infrastructure.api.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 //This is the information that arrive to our input of APIRest
@@ -12,5 +14,8 @@ public class ProductDto {
     private String description;
     private Double price;
     private String image;
+    private String provider;
+    private List<ReviewDto> reviews;
+    private List<String> categories;
 
 }

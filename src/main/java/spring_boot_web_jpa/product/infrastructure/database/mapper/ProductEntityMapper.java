@@ -1,16 +1,26 @@
 package spring_boot_web_jpa.product.infrastructure.database.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import spring_boot_web_jpa.product.domain.entity.Product;
 import spring_boot_web_jpa.product.infrastructure.database.entity.ProductEntity;
+import spring_boot_web_jpa.review.domain.Review;
+import spring_boot_web_jpa.review.infrastructure.ReviewEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface ProductEntityMapper {
 
+    @Mapping(target = "productDetail.product", ignore = true)
     ProductEntity mapToProductEntity(Product product);
 
+    @Mapping(target = "productDetail.product", ignore = true)
     Product mapToProduct(ProductEntity productEntity);
 
+    @Mapping(target = "product", ignore = true)
+    Review mapToReview(ReviewEntity reviewEntity);
+
+    @Mapping(target = "product", ignore = true)
+    ReviewEntity mapToReviewEntity(Review review);
 }

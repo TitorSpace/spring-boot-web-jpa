@@ -1,6 +1,7 @@
-package spring_boot_web_jpa.product.infrastructure.database.entity;
+package spring_boot_web_jpa.product.infrastructure.database.specification;
 
 import org.springframework.data.jpa.domain.Specification;
+import spring_boot_web_jpa.product.infrastructure.database.entity.ProductEntity;
 
 public class ProductSpecification {
 
