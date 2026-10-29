@@ -7,12 +7,15 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import spring_boot_web_jpa.common.domain.PaginationQuery;
 import spring_boot_web_jpa.common.domain.PaginationResult;
 import spring_boot_web_jpa.product.domain.entity.Product;
+import spring_boot_web_jpa.product.domain.entity.ProductFilter;
 import spring_boot_web_jpa.product.domain.port.ProductRepository;
 import spring_boot_web_jpa.product.infrastructure.database.entity.ProductEntity;
+import spring_boot_web_jpa.product.infrastructure.database.entity.ProductSpecification;
 import spring_boot_web_jpa.product.infrastructure.database.mapper.ProductEntityMapper;
 import spring_boot_web_jpa.product.infrastructure.database.repository.QueryProductRepository;
 
@@ -44,7 +47,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public PaginationResult<Product> findAll(PaginationQuery paginationQuery) {
+    public PaginationResult<Product> findAll(PaginationQuery paginationQuery, ProductFilter productFilter) {
 
         PageRequest pageRequest = PageRequest.of(
                 paginationQuery.getPage(),
@@ -52,7 +55,15 @@ public class ProductRepositoryImpl implements ProductRepository {
                 Sort.by(Sort.Direction.fromString(paginationQuery.getDirection()), paginationQuery.getSortBy())
         );
 
-        Page<ProductEntity> page = repository.findAll(pageRequest);
+        Specification<ProductEntity> specification = Specification.allOf(
+                        ProductSpecification.byName(productFilter.getName())
+                                .and(ProductSpecification.byDescription(productFilter.getDescription())))
+                .and(ProductSpecification.byPrice(productFilter.getPriceMin(), productFilter.getPriceMax())
+
+
+                );
+
+        Page<ProductEntity> page = repository.findAll(specification, pageRequest);
 
         return new PaginationResult<>(
                 page.getContent().stream().map(productEntityMapper::mapToProduct).toList(),

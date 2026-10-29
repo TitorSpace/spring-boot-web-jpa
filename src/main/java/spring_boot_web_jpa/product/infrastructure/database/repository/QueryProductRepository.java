@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface QueryProductRepository extends JpaRepository<ProductEntity, Long> {
+public interface QueryProductRepository extends JpaRepository<ProductEntity, Long>, JpaSpecificationExecutor<ProductEntity> {
     Optional<ProductEntity> findByNameContaining(String name);
 
     List<ProductEntity> findAllByPriceBetween(Double priceAfter, Double priceBefore);
