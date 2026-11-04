@@ -2,7 +2,7 @@ package spring_boot_web_jpa.product.application.command.delete;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import spring_boot_web_jpa.common.mediator.Request;
+import spring_boot_web_jpa.common.application.mediator.Request;
 
 @Data
 @AllArgsConstructor

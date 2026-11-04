@@ -1,4 +1,4 @@
-package spring_boot_web_jpa.common.config;
+package spring_boot_web_jpa.common.infrastructure.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;

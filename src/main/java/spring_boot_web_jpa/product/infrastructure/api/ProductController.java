@@ -1,13 +1,16 @@
 package spring_boot_web_jpa.product.infrastructure.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring_boot_web_jpa.common.mediator.Mediator;
+import spring_boot_web_jpa.common.application.mediator.Mediator;
+import spring_boot_web_jpa.common.domain.PaginationQuery;
+import spring_boot_web_jpa.common.domain.PaginationResult;
 import spring_boot_web_jpa.product.application.command.create.CreateProductRequest;
 import spring_boot_web_jpa.product.application.command.create.CreateProductResponse;
 import spring_boot_web_jpa.product.application.command.delete.DeleteProductRequest;
@@ -17,13 +20,13 @@ import spring_boot_web_jpa.product.application.query.getAll.GetAllProductRespons
 import spring_boot_web_jpa.product.application.query.getById.GetProductByIdRequest;
 import spring_boot_web_jpa.product.application.query.getById.GetProductByIdResponse;
 import spring_boot_web_jpa.product.domain.entity.Product;
+import spring_boot_web_jpa.product.domain.entity.ProductFilter;
 import spring_boot_web_jpa.product.infrastructure.api.dto.CreateProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.dto.ProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.dto.UpdateProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.mapper.ProductMapper;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -39,17 +42,39 @@ public class ProductController implements ProductApi {
     //With ResponseEntity objects we make sure that they last what the http request last, no more
     @Operation(summary = "Get all products", description = "Get all products")
     @GetMapping("")
-    public ResponseEntity<List<ProductDto>> getAllProduct(@RequestParam(required = false) String pageSize) {
+    public ResponseEntity<PaginationResult<ProductDto>> getAllProduct(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "5") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Double priceMin,
+            @RequestParam(required = false) Double priceMax
+    ) {
 
         log.info("Getting all products");
 
-        GetAllProductResponse response = mediator.dispatch(new GetAllProductRequest());
+        PaginationQuery paginationQuery = new PaginationQuery(pageNumber, pageSize, sortBy, direction);
 
-        List<ProductDto> productDtos = response.getProducts().stream().map(productMapper::mapToProductDto).toList();
+        ProductFilter productFilter = new ProductFilter(name, description, priceMin, priceMax);
 
-        log.info("Found {} products", productDtos.size());
+        GetAllProductRequest getAllProductRequest = new GetAllProductRequest(paginationQuery, productFilter);
 
-        return ResponseEntity.ok(productDtos);
+        GetAllProductResponse response = mediator.dispatch(getAllProductRequest);
+
+        PaginationResult<Product> productsPage = response.getProductsPage();
+
+        PaginationResult<ProductDto> productDtoPaginationResult = new PaginationResult<>(
+                productsPage.getContent().stream().map(productMapper::mapToProductDto).toList(),
+                productsPage.getPage(),
+                productsPage.getSize(),
+                productsPage.getTotalPages(),
+                productsPage.getTotalElements()
+
+        );
+
+        return ResponseEntity.ok(productDtoPaginationResult);
     }
 
     @Operation(summary = "Get product by id", description = "Get product by id")
@@ -86,7 +111,7 @@ public class ProductController implements ProductApi {
 
     @Operation(summary = "Update product", description = "Update product")
     @PutMapping("")
-    public ResponseEntity<Void> updateProduct(@ModelAttribute @Valid UpdateProductDto productDto) {
+    public ResponseEntity<Void> updateProduct(@RequestBody @Valid UpdateProductDto productDto) {
 
         log.info("Updating product with id {}", productDto.getId());
 

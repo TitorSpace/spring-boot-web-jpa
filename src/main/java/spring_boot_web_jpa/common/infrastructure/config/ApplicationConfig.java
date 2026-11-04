@@ -1,4 +1,4 @@
-package spring_boot_web_jpa.common.config;
+package spring_boot_web_jpa.common.infrastructure.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;

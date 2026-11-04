@@ -1,4 +1,4 @@
-package spring_boot_web_jpa.common.exceptions;
+package spring_boot_web_jpa.common.infrastructure.exceptions;
 
 import lombok.Data;
 

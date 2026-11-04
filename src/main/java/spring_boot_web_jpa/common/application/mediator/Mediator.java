@@ -1,4 +1,4 @@
-package spring_boot_web_jpa.common.mediator;
+package spring_boot_web_jpa.common.application.mediator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
